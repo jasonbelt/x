@@ -18,4 +18,4 @@ jobs:
       - name: Test
         run: |
           echo "Welcome to Linux"
-          echo "${branch_name}"
+          echo "${{ inputs.branch_name}} "
