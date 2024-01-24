@@ -25,4 +25,4 @@ jobs:
           date > date.txt
           git add .
           git commit -m added-stuff
-          git push -u origin ${{ inputs.branch_name }}
+          git push -u origin post-${{ inputs.branch_name }}
