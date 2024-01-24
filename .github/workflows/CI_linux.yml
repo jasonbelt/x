@@ -1,0 +1,21 @@
+name: Linux
+
+on:
+  workflow_call:
+    inputs:
+      branch_name:
+        required: true
+        type: string
+    
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Test
+        run: |
+          echo "Welcome to Linux"
+          echo ${{ inputs.branch_name }}

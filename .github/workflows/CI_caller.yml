@@ -1,0 +1,22 @@
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  linux:
+    uses: ./.github/workflows/CI_linux.yml@main
+    with: 
+      branch_name: ${{ GITHUB_RUN_NUMBER }}
+  mac:
+    uses: ./.github/workflows/CI-macOS.yml@main
+  win:
+    uses: ./github/workflows/CI-windows.yml@main
+  
+  updateRepo:
+    runs-on: ubuntu-latest
+    needs: [linux, mac, win]
+    steps: 
+      - name: Update
+        run: |
+          echo "Welcome to the updater"
+          echo "run number is $GITHUB_RUN_NUMBER"
