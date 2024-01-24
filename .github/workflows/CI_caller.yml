@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [linux, mac, win]
     steps: 
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Update
         run: |
           echo "Welcome to the updater"
