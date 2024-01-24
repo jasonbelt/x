@@ -21,5 +21,6 @@ jobs:
       - name: Update
         run: |
           echo "Welcome to the updater"
-          export RUN_X='${{ github.run_id }}-{{github.run_attempt}}'
+          export RUN_X='${{ github.run_id }}-${{github.run_attempt}}'
           echo "run number is $RUN_X"
+          git branch -a
