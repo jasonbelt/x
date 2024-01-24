@@ -6,7 +6,7 @@ jobs:
   linux:
     uses: ./.github/workflows/CI_linux.yml
     with: 
-      username: 'blah-${{github.GITHUB_RUN_NUMBER}}'
+      username: 'blah-${{github.run_id}}'
   mac:
     uses: ./.github/workflows/CI-macOS.yml
   win:
