@@ -6,7 +6,7 @@ jobs:
   linux:
     uses: ./.github/workflows/CI_linux.yml
     with: 
-      username: 'blah-${{github.run_id}}'
+      branch_name: '${{ github.run_id }}-${{github.run_attempt}}'
   mac:
     uses: ./.github/workflows/CI-macOS.yml
   win:
@@ -21,4 +21,5 @@ jobs:
       - name: Update
         run: |
           echo "Welcome to the updater"
-          echo "run number is $GITHUB_RUN_NUMBER"
+          export RUN_X='${{ github.run_id }}-{{github.run_attempt}}'
+          echo "run number is $RUN_X"

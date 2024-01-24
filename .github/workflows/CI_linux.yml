@@ -3,8 +3,7 @@ name: Linux
 on:
   workflow_call:
     inputs:
-      username:
-        default: 'not-sent'
+      branch_name:
         required: true
         type: string
     
@@ -19,4 +18,4 @@ jobs:
       - name: Test
         run: |
           echo "Welcome to Linux"
-          echo "Received: ${{ inputs.username }} "
+          echo "Received: ${{ inputs.branch_name }} "
