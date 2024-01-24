@@ -19,11 +19,11 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          
+
           echo "Welcome to Linux"
           echo "Received: ${{ inputs.branch_name }} "
           date > date.txt
           git checkout -b $${{ inputs.branch_name }}
           git add .
           git commit -m added-stuff
-          git push
+          git push --set-upstream origin ${{ inputs.branch_name }}
