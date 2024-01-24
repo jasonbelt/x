@@ -23,7 +23,7 @@ jobs:
           echo "Welcome to Linux"
           echo "Received: ${{ inputs.branch_name }} "
           date > date.txt
-          git branch -b $${{ inputs.branch_name }}
+          git branch $${{ inputs.branch_name }}
           git add .
           git commit -m added-stuff
           git push --set-upstream origin ${{ inputs.branch_name }}
