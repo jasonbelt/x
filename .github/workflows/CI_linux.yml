@@ -4,6 +4,7 @@ on:
   workflow_call:
     inputs:
       branch_name:
+        default: 'not-sent'
         required: true
         type: string
     
