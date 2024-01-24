@@ -4,13 +4,13 @@ on:
 
 jobs:
   linux:
-    uses: ./.github/workflows/CI_linux.yml@main
+    uses: ./.github/workflows/CI_linux.yml
     with: 
       branch_name: ${{ GITHUB_RUN_NUMBER }}
   mac:
-    uses: ./.github/workflows/CI-macOS.yml@main
+    uses: ./.github/workflows/CI-macOS.yml
   win:
-    uses: ./github/workflows/CI-windows.yml@main
+    uses: ./github/workflows/CI-windows.yml
   
   updateRepo:
     runs-on: ubuntu-latest
