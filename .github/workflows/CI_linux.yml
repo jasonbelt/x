@@ -26,7 +26,7 @@ jobs:
           cat date.txt
 
           echo "checkout out new branch"
-          got checkout -b ${{ inputs.branch_name }}
+          git checkout -b ${{ inputs.branch_name }}
 
           echo "git diff"
           git diff
