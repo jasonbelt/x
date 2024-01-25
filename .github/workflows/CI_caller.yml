@@ -28,5 +28,6 @@ jobs:
           git pull
           git checkout main
           git rebase $RUN_X
-          
+          git status
+          git push
           git push origin --delete $RUN_X
