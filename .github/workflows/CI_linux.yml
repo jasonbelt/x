@@ -22,7 +22,7 @@ jobs:
 
           echo "Welcome to Linux"
           echo "Received: ${{ inputs.branch_name }} "
-          #date > date.txt
+          date > date.txt
 
           if [[ `git status --porcelain` ]]; then
             # diffs detected so create a new branch using the name
