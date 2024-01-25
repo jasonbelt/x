@@ -31,11 +31,18 @@ jobs:
           #
           # This seems like a lot of steps to do the rebasing and branch
           # deletion, but ... it works
-          
-          git pull --all # get the new remote branch
-          git checkout $RUN_X # check it out the new branch localy
-          git pull # pull the new branch
-          git checkout main # switch back to main
-          git rebase $RUN_X # rebase the codegen differences back to main 
-          git push # push the results of rebasing
-          git push origin --delete $RUN_X # delete the branch just rebased onto main
+
+          git ls-remote --exit-code --heads origin $RUN_X >/dev/null 2>&1
+
+          # if exit code is 0 then the remote branch exists
+          if [[ $? == '0' ]]; then
+            git pull --all # get the new remote branch
+            git checkout $RUN_X # check it out the new branch localy
+            git pull # pull the new branch
+            git checkout main # switch back to main
+            git rebase $RUN_X # rebase the codegen differences back to main 
+            git push # push the results of rebasing
+            git push origin --delete $RUN_X # delete the branch just rebased onto main
+          else
+            echo "Remote branch $RUN_X does not exist -- ie. not codegen changes detected"
+          fi
