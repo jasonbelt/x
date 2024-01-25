@@ -24,10 +24,10 @@ jobs:
           export RUN_X='${{ github.run_id }}-${{github.run_attempt}}'
           echo "run number is $RUN_X"
           git pull --all
-          git checkout $RUN_X
-          git pull
-          git checkout main
+          #git checkout $RUN_X
+          #git pull
+          #git checkout main
           git rebase $RUN_X
-          git status
+          #git status
           git push
           git push origin --delete $RUN_X
