@@ -23,8 +23,9 @@ jobs:
           echo "Welcome to the updater"
           export RUN_X='${{ github.run_id }}-${{github.run_attempt}}'
           echo "run number is $RUN_X"
-          git fetch --all
-          git pull --all
+          #git fetch --all
+          for remote in `git branch -r`; do git checkout $(echo $remote | cut -d'/' -f 2); done
+          #git pull --all
           #git checkout $RUN_X
           #git pull
           #git checkout main
