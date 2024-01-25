@@ -32,11 +32,11 @@ jobs:
           # This seems like a lot of steps to do the rebasing and branch
           # deletion, but ... it works
 
+          git pull --all
           git ls-remote --exit-code --heads origin $RUN_X >/dev/null 2>&1
 
           # if exit code is 0 then the remote branch exists
           if [[ $? == '0' ]]; then
-            git pull --all # get the new remote branch
             git checkout $RUN_X # check it out the new branch localy
             git pull # pull the new branch
             git checkout main # switch back to main
