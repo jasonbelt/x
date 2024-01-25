@@ -22,12 +22,20 @@ jobs:
         run: |
           echo "Welcome to the updater"
           export RUN_X='${{ github.run_id }}-${{github.run_attempt}}'
-          echo "run number is $RUN_X"
-          #git fetch --all
-          git pull --all
-          git checkout $RUN_X
-          git pull
-          git checkout main
+          
+          # the basic idea is that if we get to this point then all the
+          # called/resuable workflows passed.  If a new branch was created
+          # then the linux workflow must have detected that codegen differences 
+          # required the repo be updated.  So, we'll rebase the new branch
+          # (ie. contains codegen diffs) back to main and delete the branch
+          #
+          # This seems like a lot of steps to do the rebasing and branch
+          # deletion, but ... it works
+          
+          git pull --all # get the new remote branch
+          git checkout $RUN_X # check it out the new branch localy
+          git pull # pull the new branch
+          git checkout main # switch back to main
           git rebase $RUN_X # rebase the codegen differences back to main 
           git push # push the results of rebasing
           git push origin --delete $RUN_X # delete the branch just rebased onto main
