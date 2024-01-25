@@ -24,11 +24,15 @@ jobs:
           echo "Received: ${{ inputs.branch_name }} "
           date > date.txt
 
-          # diffs detected so create a new branch using the name
-          # requested by the caller
-          git checkout -b ${{ inputs.branch_name }}
+          if [[ `git status --porcelain` ]]; then
+            # diffs detected so create a new branch using the name
+            # requested by the caller
+            git checkout -b ${{ inputs.branch_name }}
 
-          git add . 
-          git commit -m "GITHUB ACTIONS: updating repo due to detected codegen differences.  Refer to the commit log for more information"
+            git add . 
+            git commit -m "GITHUB ACTIONS: updating repo due to detected codegen differences.  Refer to the commit log for more information"
 
-          git push --set-upstream origin ${{ inputs.branch_name }}
+            git push --set-upstream origin ${{ inputs.branch_name }}
+          else
+            echo "No changes detected"
+          fi
