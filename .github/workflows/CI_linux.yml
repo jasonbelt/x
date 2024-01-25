@@ -23,17 +23,12 @@ jobs:
           echo "Welcome to Linux"
           echo "Received: ${{ inputs.branch_name }} "
           date > date.txt
-          cat date.txt
 
-          echo "checkout out new branch"
+          # diffs detected so create a new branch using the name
+          # requested by the caller
           git checkout -b ${{ inputs.branch_name }}
 
-          echo "git diff"
-          git diff
-          
-          git add .          
-          git commit -m added-stuff
-          
-          echo "git status"
-          git status
+          git add . 
+          git commit -m "GITHUB ACTIONS: updating repo due to detected codegen differences.  Refer to the commit log for more information"
+
           git push --set-upstream origin ${{ inputs.branch_name }}
