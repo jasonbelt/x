@@ -25,3 +25,5 @@ jobs:
           echo "run number is $RUN_X"
           git pull --all
           git branch -a
+          git rebase $RUN_X
+          git push origin --delete $RUN_X
