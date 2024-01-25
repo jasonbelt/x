@@ -23,7 +23,8 @@ jobs:
           echo "Welcome to the updater"
           export RUN_X='${{ github.run_id }}-${{github.run_attempt}}'
           echo "run number is $RUN_X"
-          git pull --all
-          git branch -a
+          git checkout $RUN_X
+          git pull
+          git checkout main
           git rebase $RUN_X
           git push origin --delete $RUN_X
