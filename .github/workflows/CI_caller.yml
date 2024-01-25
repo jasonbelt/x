@@ -2,14 +2,11 @@ on:
   push:
   workflow_dispatch:
 
-env:
-  branch_name: '${{ github.run_id }}-${{github.run_attempt}}'
-
 jobs:
   linux:
     uses: ./.github/workflows/CI_linux.yml
     with: 
-      branch_name: ${{ branch_name }}
+      branch_name: '${{ github.run_id }}-${{github.run_attempt}}'
   mac:
     uses: ./.github/workflows/CI-macOS.yml
   win:
@@ -18,6 +15,8 @@ jobs:
   updateRepo:
     runs-on: ubuntu-latest
     needs: [linux, mac, win]
+    env:
+      branch_name='${{ github.run_id }}-${{github.run_attempt}}'
     steps: 
       - name: Checkout
         uses: actions/checkout@v4
