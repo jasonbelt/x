@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Update
         run: |
-          echo "Welcome to the updater - looking for ${{ branch_name }}"
+          echo "Welcome to the updater - looking for $branch_name"
           
           # the basic idea is that if we get to this point then all the
           # called/resuable workflows passed.  If a new branch was created
@@ -35,16 +35,16 @@ jobs:
 
           git pull --all
           ret = 0
-          git ls-remote --exit-code --heads origin ${{ branch_name }} >/dev/null 2>&1 || ret=$?
+          git ls-remote --exit-code --heads origin $branch_name >/dev/null 2>&1 || ret=$?
           
           # if exit code is 0 then the remote branch exists
           if [[ $ret == '0' ]]; then
-            git checkout ${{ branch_name }} # check it out the new branch locally
+            git checkout $branch_name # check it out the new branch locally
             git pull # pull the new branch
             git checkout main # switch back to main
-            git rebase ${{ branch_name }} # rebase the codegen differences back to main 
+            git rebase $branch_name # rebase the codegen differences back to main 
             git push # push the results of rebasing
-            git push origin --delete ${{ branch_name }} # delete the branch just rebased onto main
+            git push origin --delete $branch_name # delete the branch just rebased onto main
           else
-            echo "Remote branch ${{ branch_name }} does not exist -- ie. not codegen changes detected"
+            echo "Remote branch $branch_name does not exist -- ie. not codegen changes detected"
           fi
