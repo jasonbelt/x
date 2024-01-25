@@ -2,11 +2,14 @@ on:
   push:
   workflow_dispatch:
 
+env:
+  branch_name: '${{ github.run_id }}-${{github.run_attempt}}'
+
 jobs:
   linux:
     uses: ./.github/workflows/CI_linux.yml
     with: 
-      branch_name: '${{ github.run_id }}-${{github.run_attempt}}'
+      branch_name: ${{ env.branch_name }}
   mac:
     uses: ./.github/workflows/CI-macOS.yml
   win:
@@ -20,8 +23,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Update
         run: |
-          echo "Welcome to the updater"
-          export RUN_X='${{ github.run_id }}-${{github.run_attempt}}'
+          echo "Welcome to the updater - looking for ${{ env.branch_name }}"
           
           # the basic idea is that if we get to this point then all the
           # called/resuable workflows passed.  If a new branch was created
@@ -33,16 +35,17 @@ jobs:
           # deletion, but ... it works
 
           git pull --all
-          git ls-remote --exit-code --heads origin $RUN_X >/dev/null 2>&1
-
+          ret = 0
+          git ls-remote --exit-code --heads origin ${{ env.branch_name }} >/dev/null 2>&1 || ret=$?
+          
           # if exit code is 0 then the remote branch exists
-          if [[ $? == '0' ]]; then
-            git checkout $RUN_X # check it out the new branch localy
+          if [[ $ret == '0' ]]; then
+            git checkout ${{ env.branch_name }} # check it out the new branch locally
             git pull # pull the new branch
             git checkout main # switch back to main
-            git rebase $RUN_X # rebase the codegen differences back to main 
+            git rebase ${{ env.branch_name }} # rebase the codegen differences back to main 
             git push # push the results of rebasing
-            git push origin --delete $RUN_X # delete the branch just rebased onto main
+            git push origin --delete ${{ env.branch_name }} # delete the branch just rebased onto main
           else
-            echo "Remote branch $RUN_X does not exist -- ie. not codegen changes detected"
+            echo "Remote branch ${{ env.branch_name }} does not exist -- ie. not codegen changes detected"
           fi
