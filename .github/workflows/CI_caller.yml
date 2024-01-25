@@ -23,12 +23,11 @@ jobs:
           echo "Welcome to the updater"
           export RUN_X='${{ github.run_id }}-${{github.run_attempt}}'
           echo "run number is $RUN_X"
-          git fetch --all
+          #git fetch --all
           git pull --all
           git checkout $RUN_X
           git pull
           git checkout main
-          git rebase $RUN_X
-          #git status
-          git push
-          git push origin --delete $RUN_X
+          git rebase $RUN_X # rebase the codegen differences back to main 
+          git push # push the results of rebasing
+          git push origin --delete $RUN_X # delete the branch just rebased onto main
