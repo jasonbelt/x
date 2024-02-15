@@ -15,9 +15,9 @@ on:
 jobs:
   container:
     runs-on: ubuntu-latest
-  env:
-    IMAGE: ${{ inputs.docker_image && inputs.docker_image || 'trustworthysystems/camkes' }}
-    VERBOSE_DEBUG: ${{ (runner.debug == '1' || inputs.verbose == 'true') && ',verbose' || '' }}
+    env:
+      IMAGE: ${{ inputs.docker_image && inputs.docker_image || 'trustworthysystems/camkes' }}
+      VERBOSE_DEBUG: ${{ (runner.debug == '1' || inputs.verbose == 'true') && ',verbose' || '' }}
     container:
       image: ${{ env.IMAGE }}
     strategy:
