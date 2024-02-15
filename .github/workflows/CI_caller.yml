@@ -1,28 +1,17 @@
 name: CAmkES
 
 on: 
-  push:
   workflow_dispatch:
     inputs:
-      name:
-        type: choice
-        description: Who to greet
-        options:
-          - monalisa
-          - cschleiden
-      message:
-        required: true
-      use-emoji:
-        type: boolean
-        description: Include 🎉🤣 emojis
-      environment:
-        type: environment
-        
+      docker_image:
+        type: string
+        description: Docker image to fetch (latest used by default)
+        default: trustworthysystems/camkes
 jobs:
   container:
     runs-on: ubuntu-latest
     container:
-      image: trustworthysystems/camkes
+      image: ${{ inputs.docker_image }}
     strategy:
       fail-fast: false
       matrix:
@@ -40,3 +29,5 @@ jobs:
           # https://github.com/actions/runner/issues/1474#issuecomment-965805123
 
           env
+
+          echo ${{ inputs.docker_image }}
