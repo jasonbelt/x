@@ -11,11 +11,15 @@ on:
         type: boolean
         description: Enable verbose testing output
         default: false
+env:
+  IMAGE: ${{ inputs.docker_image && inputs.docker_image || 'trustworthysystems/camkes' }}
+  VERBOSE_DEBUG: ${{ (runner.debug == '1' || inputs.verbose == 'true') && ',verbose' || '' }}
+  
 jobs:
   container:
     runs-on: ubuntu-latest
     container:
-      image: ${{ inputs.docker_image }}
+      image: ${{ env.IMAGE }}
     strategy:
       fail-fast: false
       matrix:
