@@ -1,50 +1,42 @@
-on:
+name: CAmkES
+
+on: 
   push:
   workflow_dispatch:
-
+    inputs:
+      name:
+        type: choice
+        description: Who to greet
+        options:
+          - monalisa
+          - cschleiden
+      message:
+        required: true
+      use-emoji:
+        type: boolean
+        description: Include 🎉🤣 emojis
+      environment:
+        type: environment
+        
 jobs:
-  linux:
-    uses: ./.github/workflows/CI_linux.yml
-    with: 
-      branch_name: '${{ github.run_id }}-${{github.run_attempt}}'
-  mac:
-    uses: ./.github/workflows/CI-macOS.yml
-  win:
-    uses: ./.github/workflows/CI-windows.yml
-  
-  updateRepo:
+  container:
     runs-on: ubuntu-latest
-    needs: [linux, mac, win]
-    env:
-      branch_name: ${{ github.run_id }}-${{github.run_attempt}}
-    steps: 
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Update
+    container:
+      image: trustworthysystems/camkes
+    strategy:
+      fail-fast: false
+      matrix:
+        VM_PARTITION: [false]
+    name: 'VM Partition=${{ matrix.VM_PARTITION }}'
+    steps:
+      - name: Build
+        env:
+          # add verbose flag if workflow is restarted with "enable debug loggin" checked
+          VERBOSE_DEBUG: ${{ runner.debug == '1' && ',verbose' || '' }}
         run: |
-          echo "Welcome to the updater - looking for $branch_name"
-          
-          # the basic idea is that if we get to this point then all the
-          # called/resuable workflows passed.  If a new branch was created
-          # then the linux workflow must have detected that codegen differences 
-          # required the repo be updated.  So, we'll rebase the new branch
-          # (ie. contains codegen diffs) back to main and delete the branch
-          #
-          # This seems like a lot of steps to do the rebasing and branch
-          # deletion, but ... it works
+          # github sets HOME to /github/home but some tools (Sireum's Os.home, Haskell) use
+          # the containers /root instead leading to inconsistent installs. Setting HOME
+          # to be root resolves the issue
+          # https://github.com/actions/runner/issues/1474#issuecomment-965805123
 
-          git pull --all
-          ret=0
-          git ls-remote --exit-code --heads origin $branch_name >/dev/null 2>&1 || ret=$?
-          
-          # if exit code is 0 then the remote branch exists
-          if [[ "${ret}" == '0' ]]; then
-            git checkout $branch_name # check it out the new branch locally
-            git pull # pull the new branch
-            git checkout main # switch back to main
-            git rebase $branch_name # rebase the codegen differences back to main 
-            git push # push the results of rebasing
-            git push origin --delete $branch_name # delete the branch just rebased onto main
-          else
-            echo "Remote branch $branch_name does not exist -- ie. not codegen changes detected"
-          fi
+          env
