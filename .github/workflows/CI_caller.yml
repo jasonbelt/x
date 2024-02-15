@@ -35,6 +35,7 @@ jobs:
           # to be root resolves the issue
           # https://github.com/actions/runner/issues/1474#issuecomment-965805123
 
-          env
+          env | sort
 
-          echo ${{ inputs.docker_image }}
+          echo "inputs.verbose = ${{ inputs.verbose }}"
+          echo "inputs.docker_image = ${{ inputs.docker_image }}"
