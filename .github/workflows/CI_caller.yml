@@ -7,6 +7,10 @@ on:
         type: string
         description: Docker image to fetch (latest used by default)
         default: trustworthysystems/camkes
+      verbose:
+        type: boolean
+        description: Enable verbose testing output
+        default: false
 jobs:
   container:
     runs-on: ubuntu-latest
