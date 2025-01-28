@@ -66,10 +66,10 @@ jobs:
           # via workflow dispatch
           VERBOSE_DEBUG: ${{ ( runner.debug == '1' || inputs.verbose == '1' ) && ',verbose' || '' }}
         run: |
-          [ -d /opt/ros2/rolling ] && export ROS2_HOME=/opt/ros2/rolling
+          [ -d /opt/ros/rolling ] && export ROS2_HOME=/opt/ros/rolling
           ls -laig /opt/
-          ls -laig /opt/ros2/
-          ls -laig /opt/ros2/rolling/
+          ls -laig /opt/ros/
+          ls -laig /opt/ros/rolling/
           env
           export COURSIER_CACHE=$GITHUB_WORKSPACE/cache/coursier
           cd $GITHUB_WORKSPACE
