@@ -62,6 +62,8 @@ jobs:
           export HOME=/home/microkit
           source $HOME/.bashrc
 
+          cargo
+          
           # get the location of the microkit sdk inside the container.  The ci scripts 
           # require MICROKIT_SDK be set in order to build the seL4 images
           export MICROKIT_SDK=$(find /home/microkit/microkit/release/ -type d -name microkit-sdk*)
