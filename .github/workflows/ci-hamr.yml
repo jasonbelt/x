@@ -60,11 +60,8 @@ jobs:
         shell: bash -leo pipefail {0} 
         run: |
           export HOME=/home/microkit
-          #source $HOME/.bashrc
           
-          cat $HOME/.bashrc
-
-          env
+          /home/microkit/.cargo/env
 
           cargo
 
