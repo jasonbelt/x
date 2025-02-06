@@ -60,6 +60,8 @@ jobs:
         shell: bash -leo pipefail {0} 
         run: |
           export HOME=/home/microkit
+          export PATH=/home/microkit/.cargo/bin:$PATH
+
           env
           whoami
           
