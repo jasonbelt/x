@@ -64,8 +64,6 @@ jobs:
 
           env
           whoami
-          
-          /home/microkit/.cargo/env
 
           cargo
 
