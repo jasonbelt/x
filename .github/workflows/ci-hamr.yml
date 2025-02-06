@@ -57,10 +57,10 @@ jobs:
           path: Sireum/bin/linux/osate
           key: ${{ runner.os }}-${{ hashFiles('Sireum/hamr/codegen/jvm/src/main/resources/phantom_versions.properties') }}-osate
       - name: Build
-        shell: bash
+        shell: bash -ileo pipefail {0} 
         run: |
           export HOME=/home/microkit
-          source $HOME/.bashrc
+          #source $HOME/.bashrc
 
           env
 
