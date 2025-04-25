@@ -20,4 +20,4 @@ jobs:
           set
           dir
           dir .\bin
-          .\bin\verify.cmd
+          call .\bin\verify.cmd
