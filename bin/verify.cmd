@@ -18,10 +18,13 @@ exit /B %errorlevel%
 
 import org.sireum._
 
+println("a")
 val home = Os.slashDir.up.canon
+println("b")
 val sireumHome = Os.sireumHomeOpt.get
+println("c")
 val sireum = sireumHome / "bin" / (if (Os.isWin) "sireum.bat" else "sireum")
-
+println("d")
 println(s"home=$home")
 println(s"sireumHome=$sireumHome")
 println(s"sireum=$sireum")
