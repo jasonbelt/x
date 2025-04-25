@@ -19,5 +19,6 @@ jobs:
           set SIREUM_HOME=%cd%\Sireum 
           cd bin
           dir
+          echo "%SIREUM_HOME%\bin\sireum.bat"
           %SIREUM_HOME%\bin\sireum.bat
-          %SIREUM_HOME%bin\sireum.bat run verify.cmd
+          %SIREUM_HOME%\bin\sireum.bat run verify.cmd
