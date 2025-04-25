@@ -55,7 +55,7 @@ The maximum of a sequence of increasing values can be computed by returning the 
 
 ## Setting up the Verification Environment
 
-1. **Install the Verification Environment**
+1. **Install Sireum and IVE**
 
     Visit the [Sireum Getting Started](https://sireum.org/getting-started/) page.
     In the section [Both VSCodium-based and IntelliJ-based IVEs](https://sireum.org/getting-started/#latest-release-bin-ives), run the script appropriate for your platform. This will install:
