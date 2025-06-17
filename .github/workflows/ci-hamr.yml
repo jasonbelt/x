@@ -60,6 +60,8 @@ jobs:
 
           export PATH=$HOME/.cargo/bin:$PATH
 
+          make -C $HOME/provers/INSPECTA-models/open-platform-models/firewall-simple-byte-array/hamr/microkit/crates/Firewall_Firewall verus
+          
           # get the location of the microkit sdk inside the container.  The ci scripts 
           # require MICROKIT_SDK be set in order to build the seL4 images
           export MICROKIT_SDK=$(find $HOME/microkit/release/ -type d -name microkit-sdk*)

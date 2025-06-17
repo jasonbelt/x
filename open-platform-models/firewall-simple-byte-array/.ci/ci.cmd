@@ -40,7 +40,7 @@ println(
       |*                            Firewall-Simple-Byte-Array                  *
       |**************************************************************************""".render
 )
-
+/*
 if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
@@ -69,7 +69,7 @@ if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
     (homeDir / "hamr" / "microkit" / "build").removeAll()
   }
 }
-
+*/
 if (result == 0) {
   result = run("Verifying via Verus", T, proc"make -C ${(homeDir / "hamr" / "microkit").value } verus")
 }

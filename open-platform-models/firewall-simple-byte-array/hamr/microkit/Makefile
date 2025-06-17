@@ -43,12 +43,16 @@ ${TOP_BUILD_DIR}/Makefile: $(SYSTEM_MAKEFILE)
 	mkdir -p ${TOP_BUILD_DIR}
 	cp $(SYSTEM_MAKEFILE) ${TOP_BUILD_DIR}/Makefile
 
-test: 
+test:
 	make -C ${CRATES_DIR}/ArduPilot_ArduPilot test
 	make -C ${CRATES_DIR}/Firewall_Firewall test
 	make -C ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver test
 
-verus: 
+verus:
+	which verus
+	echo "${PATH}"
+	ls /home/microkit/verus-x86-linux
+	ls -alig /home/microkit/verus-x86-linux/
 	make -C ${CRATES_DIR}/Firewall_Firewall verus
 
 FORCE:
