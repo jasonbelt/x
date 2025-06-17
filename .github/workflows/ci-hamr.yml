@@ -71,6 +71,8 @@ jobs:
 
           mv $(pwd)/INSPECTA-models $DEMO_ROOT/
 
+          env | sort
+          which verus
           make -C $DEMO_ROOT/INSPECTA-models/open-platform-models/firewall-simple-byte-array/hamr/microkit/crates/Firewall_Firewall verus
           
           rm -rf ${DEMO_ROOT}/Sireum # remove bootstrap version
