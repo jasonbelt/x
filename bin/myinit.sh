@@ -89,7 +89,7 @@ getVersion() {
 download() {
   echo "Downloading '$2' to '$1'"
   if command -v curl 2>&1; then
-    curl -fL -o "$1" "$2" || {
+    curl -fLsS -o "$1" "$2" || {
       >&2 echo "curl failed downloading $2"
       exit 1
     }
