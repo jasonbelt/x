@@ -6,6 +6,9 @@ before_install:
   - curl -JLso bin/sireum https://raw.githubusercontent.com/sireum/kekinian/master/bin/sireum
   - chmod +x bin/init.sh bin/sireum
   - SIREUM_NO_SETUP=true bin/init.sh
+  - ls -alig bin
+  - ls -alig bin/linux
+  - ls -alig bin/linux/java
 install:
   - unset JAVA_TOOL_OPTIONS
   - bin/sireum proyek publish --target jvm . org.sireum
