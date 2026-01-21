@@ -1,9 +1,9 @@
 jdk:
   - oraclejdk11
 before_install:
-  - apt-get update
-  - apt-get install -y ca-certificates
-  - update-ca-certificates
+  - echo $HOME
+  - cp .curlrc $HOME/.curlrc
+  - ls -laig $HOME
   - curl -JLso versions.properties https://raw.githubusercontent.com/sireum/kekinian/master/versions.properties
   - curl -JLso bin/init.sh https://raw.githubusercontent.com/sireum/kekinian/master/bin/init.sh
   - curl -JLso bin/sireum https://raw.githubusercontent.com/sireum/kekinian/master/bin/sireum
