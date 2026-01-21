@@ -9,6 +9,7 @@ before_install:
   - ls -alig bin
   - ls -alig bin/linux
   - ls -alig bin/linux/java
+  - echo hi
 install:
   - unset JAVA_TOOL_OPTIONS
   - bin/sireum proyek publish --target jvm . org.sireum
